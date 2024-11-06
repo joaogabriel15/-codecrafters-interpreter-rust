@@ -41,12 +41,12 @@ fn main() {
                         '-' => println!("MINUS - null"),
                         ';' => println!("SEMICOLON ; null"),
                         '/' => println!("SLASH / null"),
+                        '\n'=> index += 1,
                         _ => {
                             eprintln!("[line {}] Error: Unexpected character: {}", index, char);
                             exit_code = 65;
                         }
                     }
-                    index += 1;
                 });
 
                 println!("EOF  null");
