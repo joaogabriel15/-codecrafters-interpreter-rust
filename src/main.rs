@@ -1,9 +1,11 @@
 use std::env;
 use std::fs;
 use std::io::{self, Write};
+use std::process::exit;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
+    let mut exit_code: i32 = 0;
     if args.len() < 3 {
         writeln!(io::stderr(), "Usage: {} tokenize <filename>", args[0]).unwrap();
         return;
@@ -25,6 +27,7 @@ fn main() {
             // Uncomment this block to pass the first stage
             if !file_contents.is_empty() {
                 let file_contents_chars = file_contents.chars();
+                let mut index = 1;
                 let _ = file_contents_chars.for_each(|char|{
                     match char {
                         '(' => println!("LEFT_PAREN ( null"),
@@ -37,12 +40,23 @@ fn main() {
                         '+' => println!("PLUS + null"),
                         '-' => println!("MINUS - null"),
                         ';' => println!("SEMICOLON ; null"),
-                        _ => {}
+                        _ => {
+                            println!("[line {}] Error: Unexpected character: {}", index, char);
+                            exit_code = 65;
+                        }
                     }
+                    index += 1;
                 });
+                
                 println!("EOF  null");
+                if exit_code != 0 {
+                    exit(exit_code)
+                }
+
+                return;
+
             } else {
-                print!("EOF  null"); // Placeholder, remove this line when implementing the scanner
+                println!("EOF  null"); // Placeholder, remove this line when implementing the scanner
             }
         }
         _ => {
