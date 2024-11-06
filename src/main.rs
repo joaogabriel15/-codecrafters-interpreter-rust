@@ -26,11 +26,10 @@ fn main() {
 
             // Uncomment this block to pass the first stage
             if !file_contents.is_empty() {
-                let file_contents_chars = file_contents.chars();
+                let mut file_contents_chars = file_contents.chars().peekable();
                 let mut index = 1;
-                let mut last_char: char = '\0';
-
-                let _ = file_contents_chars.for_each(|char| {
+            
+                while let Some(char) = file_contents_chars.next() {
                     match char {
                         '(' => println!("LEFT_PAREN ( null"),
                         ')' => println!("RIGHT_PAREN ) null"),
@@ -44,8 +43,9 @@ fn main() {
                         ';' => println!("SEMICOLON ; null"),
                         '/' => println!("SLASH / null"),
                         '=' => {
-                            if last_char == '=' {
+                            if let Some('=') = file_contents_chars.peek() {
                                 println!("EQUAL_EQUAL == null");
+                                file_contents_chars.next(); 
                             } else {
                                 println!("EQUAL = null");
                             }
@@ -55,10 +55,8 @@ fn main() {
                             eprintln!("[line {}] Error: Unexpected character: {}", index, char);
                             exit_code = 65;
                         }
-                    };
-
-                    last_char = char;
-                });
+                    }
+                }
 
                 println!("EOF  null");
                 if exit_code != 0 {
