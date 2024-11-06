@@ -31,12 +31,16 @@ fn main() {
                         ')' => println!("RIGHT_PAREN ) null"),
                         '{' => println!("LEFT_BRACE {{ null"),
                         '}' => println!("RIGHT_BRACE }} null"),
+                        '*' => println!("STAR * null"),
+                        '.' => println!("DOT . null"),
+                        ',' => println!("COMMA , null"),
+                        '+' => println!("PLUS + null"),
                         _ => {}
                     }
                 });
                 println!("EOF  null");
             } else {
-                println!("EOF  null"); // Placeholder, remove this line when implementing the scanner
+                print!("EOF  null"); // Placeholder, remove this line when implementing the scanner
             }
         }
         _ => {
