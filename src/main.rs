@@ -43,7 +43,7 @@ fn main() {
                         '/' => println!("SLASH / null"),
                         '\n' => index += 1,
                         _ => {
-                            println!("[line {}] Error: Unexpected character: {}", index, char);
+                            eprintln!("[line {}] Error: Unexpected character: {}", index, char);
                             exit_code = 65;
                         }
                     }
