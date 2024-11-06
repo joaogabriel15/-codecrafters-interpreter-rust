@@ -28,9 +28,9 @@ fn main() {
             if !file_contents.is_empty() {
                 let file_contents_chars = file_contents.chars();
                 let mut index = 1;
-                let mut last_char:char = '\0';
+                let mut last_char: char = '\0';
 
-                let _ = file_contents_chars.for_each(|char|{
+                let _ = file_contents_chars.for_each(|char| {
                     match char {
                         '(' => println!("LEFT_PAREN ( null"),
                         ')' => println!("RIGHT_PAREN ) null"),
@@ -44,24 +44,20 @@ fn main() {
                         ';' => println!("SEMICOLON ; null"),
                         '/' => println!("SLASH / null"),
                         '=' => {
-                            if last_char == '='{
+                            if last_char == '=' {
                                 println!("EQUAL_EQUAL == null");
-                                last_char = '\0';
-                            }else {
+                            } else {
                                 println!("EQUAL = null");
-                                last_char = '=';
                             }
-                        },
-                        '\n'=> index += 1,
+                        }
+                        '\n' => index += 1,
                         _ => {
                             eprintln!("[line {}] Error: Unexpected character: {}", index, char);
                             exit_code = 65;
                         }
                     };
 
-                    if char != '=' {
-                        last_char = char;
-                    }
+                    last_char = char;
                 });
 
                 println!("EOF  null");
@@ -70,7 +66,6 @@ fn main() {
                 }
 
                 return;
-
             } else {
                 println!("EOF  null"); // Placeholder, remove this line when implementing the scanner
             }
