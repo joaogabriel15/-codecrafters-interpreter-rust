@@ -35,6 +35,8 @@ fn main() {
                         '.' => println!("DOT . null"),
                         ',' => println!("COMMA , null"),
                         '+' => println!("PLUS + null"),
+                        '-' => println!("MINUS - null"),
+                        ';' => println!("SEMICOLON ; null"),
                         _ => {}
                     }
                 });
