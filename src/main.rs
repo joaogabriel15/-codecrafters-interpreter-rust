@@ -40,7 +40,9 @@ fn main() {
                         '+' => println!("PLUS + null"),
                         '-' => println!("MINUS - null"),
                         ';' => println!("SEMICOLON ; null"),
-                        '@' => (),
+                        '@' => {
+                            exit_code = 65
+                        },
                         _ => {
                             println!("[line {}] Error: Unexpected character: {}", index, char);
                             exit_code = 65;
