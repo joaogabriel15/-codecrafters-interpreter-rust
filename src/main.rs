@@ -46,8 +46,10 @@ fn main() {
                         '=' => {
                             if last_char == '='{
                                 println!("EQUAL_EQUAL == null");
+                                last_char = '\0';
                             }else {
                                 println!("EQUAL = null");
+                                last_char = '=';
                             }
                         },
                         '\n'=> index += 1,
@@ -57,9 +59,7 @@ fn main() {
                         }
                     };
 
-                    if last_char == '=' && char == '=' {
-                        last_char = '\0'
-                    }else{
+                    if char != '=' {
                         last_char = char;
                     }
                 });
