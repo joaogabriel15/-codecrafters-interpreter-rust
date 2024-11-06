@@ -28,6 +28,8 @@ fn main() {
             if !file_contents.is_empty() {
                 let file_contents_chars = file_contents.chars();
                 let mut index = 1;
+                let mut last_char:char = '\0';
+
                 let _ = file_contents_chars.for_each(|char|{
                     match char {
                         '(' => println!("LEFT_PAREN ( null"),
@@ -41,11 +43,24 @@ fn main() {
                         '-' => println!("MINUS - null"),
                         ';' => println!("SEMICOLON ; null"),
                         '/' => println!("SLASH / null"),
+                        '=' => {
+                            if last_char == '='{
+                                println!("EQUAL_EQUAL == null");
+                            }else {
+                                println!("EQUAL = null");
+                            }
+                        },
                         '\n'=> index += 1,
                         _ => {
                             eprintln!("[line {}] Error: Unexpected character: {}", index, char);
                             exit_code = 65;
                         }
+                    };
+
+                    if last_char == '=' && char == '=' {
+                        last_char = '\0'
+                    }else{
+                        last_char = char;
                     }
                 });
 
