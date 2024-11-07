@@ -41,7 +41,19 @@ fn main() {
                         '+' => println!("PLUS + null"),
                         '-' => println!("MINUS - null"),
                         ';' => println!("SEMICOLON ; null"),
-                        '/' => println!("SLASH / null"),
+                        '/' =>{
+                            if let Some('/') = file_contents_chars.peek() {
+                                file_contents_chars.next();
+                                while let Some(c) = file_contents_chars.next() {
+                                    if c == '\n' {
+                                        break;
+                                    }
+                                }
+                            } else {
+                                println!("SLASH / null");
+                            }
+                        
+                        },
                         '!' => {
                             if let Some('=') = file_contents_chars.peek() {
                                 println!("BANG_EQUAL != null");
