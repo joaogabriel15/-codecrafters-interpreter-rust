@@ -46,6 +46,7 @@ fn main() {
                                 file_contents_chars.next();
                                 while let Some(c) = file_contents_chars.next() {
                                     if c == '\n' {
+                                        index += 1;
                                         break;
                                     }
                                 }
