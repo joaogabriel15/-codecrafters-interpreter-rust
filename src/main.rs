@@ -67,6 +67,12 @@ fn main() {
                             if let Some('=') = file_contents_chars.peek() {
                                 println!("LESS_EQUAL <= null");
                                 file_contents_chars.next(); 
+                            } else if let Some('|') = file_contents_chars.peek(){
+                                while let Some(c) = file_contents_chars.next() {
+                                    if c == '>' {
+                                        break;
+                                    }
+                                }
                             } else {
                                 println!("LESS < null");
                             }
