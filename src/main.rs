@@ -92,7 +92,7 @@ fn main() {
                         ' ' | '\r' | '\t' => {},
                         '\n' => index += 1,
                         _ => {
-                            eprintln!("[line {}] Error: Unexpected character: {}", index + 1, char);
+                            eprintln!("[line {}] Error: Unexpected character: {}", index, char);
                             exit_code = 65;
                         }
                     }
