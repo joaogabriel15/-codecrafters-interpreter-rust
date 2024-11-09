@@ -102,6 +102,26 @@ fn main() {
                             }
                         
                         },
+                        '0'..='9' =>{
+                            let mut number = String::new();
+                            number.push(char);
+                        
+                            while let Some(&next_char) = file_contents_chars.peek() {
+                                if next_char.is_digit(10) || next_char == '.' {
+                                    number.push(file_contents_chars.next().unwrap());
+                                } else {
+                                    break;
+                                }
+                            }
+                        
+                            match number.parse::<f32>() {
+                                Ok(num) => println!("NUMBER {} {}", number, num),
+                                Err(_) => {
+                                    eprintln!("[line {}] Error: Invalid number format: {}", index, number);
+                                    exit_code = 65;
+                                }
+                            }
+                        },
                         '=' => {
                             if let Some('=') = file_contents_chars.peek() {
                                 println!("EQUAL_EQUAL == null");
