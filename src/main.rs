@@ -85,7 +85,7 @@ fn main() {
                             word.push(c);
 
                             while let Some(c) = file_contents_chars.next() {
-                                if c != ' ' {
+                                if c != ' ' && (is_alpha(c) || c.is_digit(10)) {
                                     word.push(c);
                                 }
 
