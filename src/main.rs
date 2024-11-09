@@ -89,7 +89,7 @@ fn main() {
                                     word.push(c);
                                 }
 
-                                if c == '\n' || c == ' ' || !(is_alpha(c) || !c.is_digit(10))  || file_contents_chars.peek() == None  {
+                                if c == '\n' || c == ' ' || !(is_alpha(c) || c.is_digit(10))  || file_contents_chars.peek() == None  {
                                     break;
                                 } 
                                 
