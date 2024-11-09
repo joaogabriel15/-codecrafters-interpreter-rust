@@ -3,6 +3,13 @@ use std::fs;
 use std::io::{self, Write};
 use std::process::exit;
 
+fn is_alpha(c: char) -> bool{
+    return (c >= 'a' && c <= 'z') ||
+           (c >= 'A' && c <= 'Z') ||
+            c == '_';
+  }
+
+
 fn main() {
     let args: Vec<String> = env::args().collect();
     let mut exit_code: i32 = 0;
@@ -73,6 +80,20 @@ fn main() {
                                 println!("STRING \"{}\" {}", word, word);
                             }
                         }
+                        c if is_alpha(c) =>{
+                            let mut word = String::new();
+                            word.push(c);
+
+                            while let Some(c) = file_contents_chars.next() {
+                                word.push(c);
+                                
+                                if c == '\n' || c == ' ' || file_contents_chars.peek() == None  {
+                                    break;
+                                } 
+                                
+                            }
+                            println!("IDENTIFIER {} null", word);
+                        },
                         '!' => {
                             if let Some('=') = file_contents_chars.peek() {
                                 println!("BANG_EQUAL != null");
