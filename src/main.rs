@@ -115,7 +115,7 @@ fn main() {
                             }
                         
                             match number.parse::<f32>() {
-                                Ok(num) => println!("NUMBER {} {}", number, num),
+                                Ok(num) => println!("NUMBER {} {:.1}", number, num),
                                 Err(_) => {
                                     eprintln!("[line {}] Error: Invalid number format: {}", index, number);
                                     exit_code = 65;
