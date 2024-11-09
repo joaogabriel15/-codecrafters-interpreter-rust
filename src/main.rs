@@ -80,20 +80,18 @@ fn main() {
                                 println!("STRING \"{}\" {}", word, word);
                             }
                         }
-                        c if is_alpha(c) =>{
+                        c if is_alpha(c) => {
                             let mut word = String::new();
                             word.push(c);
-
-                            while let Some(c) = file_contents_chars.next() {
-                                if c != ' ' && (is_alpha(c) || c.is_digit(10)) {
-                                    word.push(c);
-                                }
-
-                                if c == '\n' || c == ' ' || !(is_alpha(c) || c.is_digit(10))  || file_contents_chars.peek() == None  {
+                        
+                            while let Some(&next_char) = file_contents_chars.peek() {
+                                if is_alpha(next_char) || next_char.is_digit(10) {
+                                    word.push(file_contents_chars.next().unwrap());
+                                } else {
                                     break;
-                                } 
-                                
+                                }
                             }
+                        
                             println!("IDENTIFIER {} null", word);
                         },
                         '!' => {
