@@ -55,6 +55,26 @@ fn main() {
                             }
                         
                         },
+                        '"' =>{
+                                let mut word = String::new();
+                                let mut is_closed = false;
+                                while let Some(c) = file_contents_chars.next() {
+                                    
+                                    if c == '"' {
+                                        is_closed = true;  
+                                        break;
+                                    } else if c == '\n' || file_contents_chars.peek().is_none() {
+                                        eprintln!("[line {}] Error: Unterminated string", index);
+                                        exit_code = 65;
+                                        break;
+                                    } else {
+                                        word.push(c);
+                                    }
+                                }
+                                if is_closed {
+                                    println!("STRING \"{}\" {}", word, word);
+                                }
+                        },
                         '!' => {
                             if let Some('=') = file_contents_chars.peek() {
                                 println!("BANG_EQUAL != null");
