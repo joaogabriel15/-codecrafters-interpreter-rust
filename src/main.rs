@@ -28,7 +28,7 @@ fn main() {
             if !file_contents.is_empty() {
                 let mut file_contents_chars = file_contents.chars().peekable();
                 let mut index = 1;
-            
+
                 while let Some(char) = file_contents_chars.next() {
                     match char {
                         '(' => println!("LEFT_PAREN ( null"),
@@ -41,7 +41,7 @@ fn main() {
                         '+' => println!("PLUS + null"),
                         '-' => println!("MINUS - null"),
                         ';' => println!("SEMICOLON ; null"),
-                        '/' =>{
+                        '/' => {
                             if let Some('/') = file_contents_chars.peek() {
                                 file_contents_chars.next();
                                 while let Some(c) = file_contents_chars.next() {
@@ -53,56 +53,51 @@ fn main() {
                             } else {
                                 println!("SLASH / null");
                             }
-                        
-                        },
-                        '"' =>{
-                                let mut word = String::new();
-                                let mut is_closed = false;
-                                while let Some(c) = file_contents_chars.next() {
-                                    
-                                    if c == '"' {
-                                        is_closed = true;  
-                                        break;
-                                    } else if c == '\n' || file_contents_chars.peek().is_none() {
-                                        eprintln!("[line {}] Error: Unterminated string.", index);
-                                        exit_code = 65;
-                                        break;
-                                    } else {
-                                        word.push(c);
-                                    }
+                        }
+                        '"' => {
+                            let mut word = String::new();
+                            let mut is_closed = false;
+                            while let Some(c) = file_contents_chars.next() {
+                                if c == '"' {
+                                    is_closed = true;
+                                    break;
+                                } else if c == '\n' || file_contents_chars.peek().is_none() {
+                                    eprintln!("[line {}] Error: Unterminated string.", index);
+                                    exit_code = 65;
+                                    break;
+                                } else {
+                                    word.push(c);
                                 }
-                                if is_closed {
-                                    println!("STRING \"{}\" {}", word, word);
-                                }
-                        },
+                            }
+                            if is_closed {
+                                println!("STRING \"{}\" {}", word, word);
+                            }
+                        }
                         '!' => {
                             if let Some('=') = file_contents_chars.peek() {
                                 println!("BANG_EQUAL != null");
-                                file_contents_chars.next(); 
+                                file_contents_chars.next();
                             } else {
                                 println!("BANG ! null");
                             }
-                        
-                        },
+                        }
                         '<' => {
                             if let Some('=') = file_contents_chars.peek() {
                                 println!("LESS_EQUAL <= null");
-                                file_contents_chars.next(); 
+                                file_contents_chars.next();
                             } else {
                                 println!("LESS < null");
                             }
-                        
-                        },
+                        }
                         '>' => {
                             if let Some('=') = file_contents_chars.peek() {
                                 println!("GREATER_EQUAL >= null");
-                                file_contents_chars.next(); 
+                                file_contents_chars.next();
                             } else {
                                 println!("GREATER > null");
                             }
-                        
-                        },
-                        '0'..='9' =>{
+                        }
+                        '0'..='9' => {
                             let mut number = String::new();
                             number.push(char);
                         
@@ -114,8 +109,9 @@ fn main() {
                                 }
                             }
                         
-                            match number.parse::<f32>() {
-                                Ok(num) => println!("NUMBER {} {:.1}", number, num),
+
+                            match number.parse::<f64>() {
+                                Ok(num) => println!("NUMBER {} {:.?}", number, num),
                                 Err(_) => {
                                     eprintln!("[line {}] Error: Invalid number format: {}", index, number);
                                     exit_code = 65;
@@ -125,12 +121,12 @@ fn main() {
                         '=' => {
                             if let Some('=') = file_contents_chars.peek() {
                                 println!("EQUAL_EQUAL == null");
-                                file_contents_chars.next(); 
+                                file_contents_chars.next();
                             } else {
                                 println!("EQUAL = null");
                             }
                         }
-                        ' ' | '\r' | '\t' => {},
+                        ' ' | '\r' | '\t' => {}
                         '\n' => index += 1,
                         _ => {
                             eprintln!("[line {}] Error: Unexpected character: {}", index, char);
