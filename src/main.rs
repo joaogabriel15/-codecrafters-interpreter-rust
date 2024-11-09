@@ -64,7 +64,7 @@ fn main() {
                                         is_closed = true;  
                                         break;
                                     } else if c == '\n' || file_contents_chars.peek().is_none() {
-                                        eprintln!("[line {}] Error: Unterminated string", index);
+                                        eprintln!("[line {}] Error: Unterminated string.", index);
                                         exit_code = 65;
                                         break;
                                     } else {
