@@ -85,8 +85,10 @@ fn main() {
                             word.push(c);
 
                             while let Some(c) = file_contents_chars.next() {
-                                word.push(c);
-                                
+                                if c != ' ' {
+                                    word.push(c);
+                                }
+
                                 if c == '\n' || c == ' ' || file_contents_chars.peek() == None  {
                                     break;
                                 } 
